@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/common_loading_ll"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@mipmap/common_loading_bg"
+    android:paddingLeft="10dip"
+    android:paddingRight="10dip"
+    android:gravity="center"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/common_loading_dialog_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:contentDescription="@string/common_img_tips"
+        android:src="@mipmap/common_loading_img" />
+
+    <TextView
+        android:id="@+id/common_loading_dialog_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:text="@string/common_loading_dialog_loading"
+        android:textColor="@color/white" />
+
+</LinearLayout>

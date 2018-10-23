@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:state_checked="true"-->
+    <!--android:drawable="@mipmap/login_checkbox_eoa" />&lt;!&ndash;选中时效果&ndash;&gt;-->
+    <!--<item android:state_checked="false"-->
+    <!--android:drawable="@mipmap/vote_view_checkbox_unckeck" />&lt;!&ndash;未选中时效果&ndash;&gt;-->
+    <item android:drawable="@mipmap/mr" android:state_checked="true" /><!--选中时效果-->
+    <item android:drawable="@mipmap/k" android:state_checked="false" /><!--未选中时效果-->
+</selector>  

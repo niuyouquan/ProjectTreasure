@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.youth.banner.Banner xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/convenientBanner"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    app:indicator_drawable_selected="@drawable/banner_dian_focus"
+    app:indicator_drawable_unselected="@drawable/banner_dian_normal"
+    android:background="@color/white"
+    app:is_auto_play="true"/>
