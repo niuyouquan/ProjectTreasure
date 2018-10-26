@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.nyq.projecttreasure.R;
+import com.nyq.projecttreasure.activitys.main.MainActivity;
 import com.nyq.projecttreasure.application.App;
 import com.nyq.projecttreasure.application.ParseUserData;
 import com.nyq.projecttreasure.application.ServerData_Pref;
@@ -130,7 +131,7 @@ public class WelcomeActivity extends Activity {
     }
 
     private void goMain() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         this.finish();
     }

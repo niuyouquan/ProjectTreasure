@@ -14,7 +14,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp"
-        android:text="TextView" />
+        android:src="@mipmap/nav_icon_back"/>
 
     <TextView
         android:id="@+id/title"

@@ -121,7 +121,7 @@ public class ApkUpdateManager {
                 }
             }
         });
-        apkUpdateDialog.setContent("工具宝v" + version + "新特性：",
+        apkUpdateDialog.setContent("项目宝v" + version + "新特性：",
                 content,
                 "安装包大小：" + String.format("%.2f", size) + "MB");
         apkUpdateDialog.show();

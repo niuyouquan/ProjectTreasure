@@ -29,7 +29,6 @@ import com.nyq.projecttreasure.utils.ActivityManager;
 import com.nyq.projecttreasure.utils.Constant;
 import com.nyq.projecttreasure.utils.HandlerUtils;
 import com.nyq.projecttreasure.utils.LogUtil;
-import com.nyq.projecttreasure.utils.SPUtils;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 
@@ -161,22 +160,6 @@ public class BaseActivity extends AppCompatActivity implements HandlerUtils.OnRe
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setStatusBarTintResource(colorRes);
     }
-
-    //为状态栏着色
-    public void setStatusBarTintColor(int colorRes) {
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintColor(colorRes);
-    }
-
-
-    //为状态栏着色
-    public void setStatusBarColorx(int color) {
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintColor(color);
-    }
-
 
     /**
      * 在其他设备登录

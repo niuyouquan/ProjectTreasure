@@ -1,6 +1,7 @@
 package com.nyq.projecttreasure.activitys.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,12 +15,17 @@ import android.widget.Toast;
 
 import com.next.easynavigition.view.EasyNavigitionBar;
 import com.nyq.projecttreasure.R;
+import com.nyq.projecttreasure.activitys.start.GestureLoginActivity;
+import com.nyq.projecttreasure.activitys.start.LoginActivity;
 import com.nyq.projecttreasure.base.BaseActivity;
 import com.nyq.projecttreasure.fragments.FindFragment;
 import com.nyq.projecttreasure.fragments.HomeFragment;
 import com.nyq.projecttreasure.fragments.MeFragment;
 import com.nyq.projecttreasure.fragments.MsgFragment;
+import com.nyq.projecttreasure.utils.AGCache;
 import com.nyq.projecttreasure.utils.ActivityManager;
+import com.nyq.projecttreasure.utils.SPUtils;
+import com.nyq.projecttreasure.utils.StringHelper;
 import com.nyq.projecttreasure.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -70,10 +76,19 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public boolean onTabClickEvent(View view, int position) {
                         if (position == 4) {
-                            Toast.makeText(MainActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
-                            //return true则拦截事件、不进行页面切换
-                            navigitionBar.setMsgPointCount(0,20);
-                            return true;
+                            if (StringHelper.isBlank(AGCache.USER_ACCOUNT) || StringHelper.isBlank(AGCache.USER_PSW)){
+                                Toast.makeText(MainActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
+                                boolean isCheckeds = (boolean) SPUtils.get(MainActivity.this,"isChecked",false);
+                                if (isCheckeds) {
+                                    Intent intent = new Intent(MainActivity.this, GestureLoginActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                }
+                                //return true则拦截事件、不进行页面切换
+                                return true;
+                            }
                         } else if (position == 2) {
                             //＋ 旋转动画
                             if (flag) {
@@ -82,6 +97,7 @@ public class MainActivity extends BaseActivity {
                                 navigitionBar.getCustomAddView().animate().rotation(0).setDuration(400);
                             }
                             flag = !flag;
+                            navigitionBar.setMsgPointCount(0,20); //红点未读数
                         }
                         return false;
                     }

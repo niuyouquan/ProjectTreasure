@@ -68,13 +68,36 @@
             android:screenOrientation="portrait"
             android:theme="@style/activityTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <activity android:name=".activitys.start.GestureLoginActivity"
+            android:label="登录页"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/activityTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
         <activity
             android:name=".activitys.main.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activitys.main.ChenjinshiActivity"></activity>
+        <activity
+            android:name=".activitys.main.ChenjinshiActivity"
+            android:label="activity沉浸式"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activitys.setting.WholePatternSettingActivity"
+            android:label="手势密码设置"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activitys.setting.WholePatternCheckingActivity"
+            android:label="验证手势密码"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
     </application>
 
 </manifest>

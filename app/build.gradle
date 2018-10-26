@@ -55,6 +55,10 @@ dependencies {
     implementation 'com.github.forvv231:EasyNavigition:1.0.0'
     //圆角图片
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+    //switch开关
+    implementation 'me.panpf:switch-button:2.0.0'
+    //手势密码
+    implementation 'com.github.ihsg:PatternLocker:2.1.0'
     //1.1.0 API改动过大，老用户升级需谨慎
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'

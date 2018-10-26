@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context="com.nyq.projecttreasure.fragments.MeFragment"
+    tools:ignore="ResAuto">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        app:srlDragRate="0.75"
+        app:srlEnableLoadMore="true"
+        app:srlEnablePureScrollMode="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/profile"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="50dp"
+                    android:src="@mipmap/image_avatar_1"
+                    app:civ_border_color="@android:color/white"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="Kanye West"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#22ffffff"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ssmm"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@mipmap/ssmm"
+                    android:gravity="center_vertical"
+                    android:text="启用手势密码"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dp_16" />
+
+                <me.panpf.switchbutton.SwitchButton
+                    android:id="@+id/switchBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/szssmm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#44ffffff"
+                android:drawableEnd="@mipmap/right_advance"
+                android:drawableLeft="@mipmap/syss"
+                android:drawablePadding="10dp"
+                android:drawableRight="@mipmap/right_advance"
+                android:drawableStart="@mipmap/syss"
+                android:gravity="center_vertical"
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="15dp"
+                android:text="设置手势密码"
+                android:textColor="@color/font_color"
+                android:textSize="@dimen/dp_16" />
+
+            <TextView
+                android:id="@+id/bzfk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#77ffffff"
+                android:drawableEnd="@mipmap/right_advance"
+                android:drawableLeft="@mipmap/icon_order_record"
+                android:drawablePadding="10dp"
+                android:drawableRight="@mipmap/right_advance"
+                android:drawableStart="@mipmap/icon_order_record"
+                android:gravity="center_vertical"
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="15dp"
+                android:text="消息通知"
+                android:textColor="#333333"
+                android:textSize="@dimen/dp_16" />
+
+            <TextView
+                android:id="@+id/yssm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#aaffffff"
+                android:drawableEnd="@mipmap/right_advance"
+                android:drawableLeft="@mipmap/icon_order_record"
+                android:drawablePadding="10dp"
+                android:drawableRight="@mipmap/right_advance"
+                android:drawableStart="@mipmap/icon_order_record"
+                android:gravity="center_vertical"
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="15dp"
+                android:text="消息通知"
+                android:textColor="#333333"
+                android:textSize="@dimen/dp_16" />
+
+            <TextView
+                android:id="@+id/gywm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ddffffff"
+                android:drawableEnd="@mipmap/right_advance"
+                android:drawableLeft="@mipmap/icon_order_record"
+                android:drawablePadding="10dp"
+                android:drawableRight="@mipmap/right_advance"
+                android:drawableStart="@mipmap/icon_order_record"
+                android:gravity="center_vertical"
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="15dp"
+                android:text="消息通知"
+                android:textColor="#333333"
+                android:textSize="@dimen/dp_16" />
+
+
+            <Button
+                android:id="@+id/btn_logout"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#eeffffff"
+                android:text="退出登录"
+                android:textColor="#333333"
+                android:textSize="@dimen/dp_16" />
+
+        </LinearLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</FrameLayout>
