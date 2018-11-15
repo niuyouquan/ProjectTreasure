@@ -114,7 +114,6 @@ public class HomeFragment extends Fragment {
 
     public void initView() {
         title.setText("嵌套滑动");
-
         BANNER_ITEMS.clear();
         BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg");
         BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3566.jpg");
@@ -232,6 +231,7 @@ public class HomeFragment extends Fragment {
         appList.add(new AppInfo("香菇蒸鸟蛋", R.mipmap.image_practice_repast_2));
         appList.add(new AppInfo("花溪牛肉粉", R.mipmap.image_practice_repast_3));
         appList.add(new AppInfo("破酥包", R.mipmap.image_practice_repast_4));
+        appList.add(new AppInfo("但家香酥鸭", R.mipmap.image_practice_repast_1));
         return appList;
     }
 

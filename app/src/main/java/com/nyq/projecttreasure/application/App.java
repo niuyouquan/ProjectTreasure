@@ -3,6 +3,7 @@ package com.nyq.projecttreasure.application;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.nyq.projecttreasure.okhttp.OkhttpUtil;
 import com.nyq.projecttreasure.utils.RootProxyUtil;
@@ -76,7 +77,7 @@ public class App extends Application {
 //        /**
 //         * 65535 问题
 //         */
-//        MultiDex.install(this);
+        MultiDex.install(this);
         /**
          * xutils3网络框架
          */
@@ -106,23 +107,6 @@ public class App extends Application {
                 .writeTimeout(15000L, TimeUnit.SECONDS)
                 .build();
         OkhttpUtil.initClient(okHttpClient);
-
-//        DisplayImageOptions defaultOptions = new DisplayImageOptions
-//                .Builder()
-//                .showImageForEmptyUri(R.drawable.empty_photo)
-//                .showImageOnFail(R.drawable.empty_photo)
-//                .cacheInMemory(true)
-//                .cacheOnDisc(true)
-//                .build();
-//
-//        ImageLoaderConfiguration config = new ImageLoaderConfiguration
-//                .Builder(getApplicationContext())
-//                .defaultDisplayImageOptions(defaultOptions)
-//                .discCacheSize(50 * 1024 * 1024)//
-//                .discCacheFileCount(100)//缓存一百张图片
-//                .writeDebugLogs()
-//                .build();
-//        ImageLoader.getInstance().init(config);
     }
 
     public static Context getContextObject() {

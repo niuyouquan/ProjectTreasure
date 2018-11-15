@@ -36,8 +36,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     Unbinder unbinder;
     @BindView(R.id.userName)
     TextView userName;
-    @BindView(R.id.userContent)
-    TextView userContent;
     @BindView(R.id.profile)
     LinearLayout profile;
     @BindView(R.id.szssmm)

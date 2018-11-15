@@ -85,7 +85,6 @@ public class WelcomeActivity extends Activity {
             // 取得相应的值，如果没有该值，说明还未写入，用true作为默认值
             boolean isFirstRun = preferences.getBoolean(Constant.APP_IS_FIRST_RUN, true);
             // 判断程序与第几次运行，如果是第一次运行则跳转到引导界面，否则跳转到主界面
-
             if (StringHelper.isBlank(appVersionCode) || (StringHelper.isNotBlank(appVersionCode) && !appVersionCode.equals(CurrentVersion.getVersionName(WelcomeActivity.this)))) {
                 if (isFirstRun) {
                     if (app.isRoot()) {

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 基础adapter
- *
- * @param <E>
+ * @package: ${com.gsww.jkgs.glb.adapter}
+ * @author: ${mawx}
+ * @date: ${07.18} ${18:41}
+ * Copyright © ${2018} 中国电信甘肃万维公司. All rights reserved.
+ * @description: adapter基类
  */
 public abstract class BaseListAdapter<E> extends BaseAdapter {
 
