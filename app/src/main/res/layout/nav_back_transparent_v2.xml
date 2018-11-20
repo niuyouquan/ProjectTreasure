@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="#00000000"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/top_left"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:gravity="left|center_vertical">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:src="@mipmap/nav_back_white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/top_middle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_18" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/top_right"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical"
+        android:visibility="invisible">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="12dp" />
+    </LinearLayout>
+</LinearLayout>

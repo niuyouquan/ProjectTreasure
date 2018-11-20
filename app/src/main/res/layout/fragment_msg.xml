@@ -16,19 +16,10 @@
         app:srlEnableLoadMore="true"
         app:srlEnableAutoLoadMore="false"
         android:background="@color/white"
-       >
+        app:srlEnablePreviewInEditMode="false">
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srlFinishDuration="500"
-            app:srlEnableLastTime="true"
-            app:srlClassicsSpinnerStyle="FixedBehind"
-            app:srlTextSizeTitle="16sp"
-            app:srlTextSizeTime="10dp"
-            app:srlTextTimeMarginTop="2dp"
-            app:srlDrawableArrowSize="20dp"
-            app:srlDrawableProgressSize="20dp"
-            app:srlDrawableMarginRight="20dp"
             android:background="@color/white"
             app:srlAccentColor="@color/colorPrimary"/>
         <android.support.v7.widget.RecyclerView

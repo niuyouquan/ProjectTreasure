@@ -10,4 +10,7 @@
     <string name="item_style_theme_red_abstract">更改为红色主题颜色</string>
     <string name="item_style_theme_green_abstract">更改为绿色主题颜色</string>
     <string name="item_style_theme_blue_abstract">更改为蓝色主题颜色</string>
+
+    <string name="expand_string">展开</string>
+    <string name="collapsed_string">收起</string>
 </resources>

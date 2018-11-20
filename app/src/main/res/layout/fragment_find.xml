@@ -1,71 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context=".fragments.FindFragment">
+    android:background="@color/white"
+    app:srlEnablePreviewInEditMode="false">
 
-    <ImageView
-        android:id="@+id/parallax"
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
         android:layout_width="match_parent"
-        android:layout_height="670dp"
-        android:layout_marginTop="-300dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/image_weibo_home_2"
-        app:layout_collapseMode="parallax"/>
+        android:layout_height="wrap_content"
+        app:srlAccentColor="@color/normal_blue" />
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlEnablePreviewInEditMode="false">
+        android:layout_height="wrap_content">
 
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        <com.nyq.projecttreasure.views.ObservableScrollView
+            android:id="@+id/osv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlAccentColor="@android:color/white"/>
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:scrollbars="none">
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/nested_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v4.widget.NestedScrollView>
-
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-    <android.support.v7.widget.Toolbar style="@style/AppTheme.Toolbar"
-        android:id="@+id/toolbar"
-        android:background="@android:color/transparent"
-        android:layout_marginBottom="0dp"
-        app:navigationIcon="?attr/homeAsUpIndicator"
-        app:layout_collapseMode="pin">
-        <android.support.v7.widget.ButtonBarLayout
-            android:id="@+id/buttonBarLayout"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/toolbar_avatar"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="@dimen/dp_10"
-                android:layout_marginRight="@dimen/dp_10"
-                android:src="@mipmap/image_avatar_1"
-                app:civ_border_width="@dimen/division_line"
-                app:civ_border_color="@android:color/white"
-                app:civ_border_overlay="true"/>
-            <TextView
-                android:id="@+id/title"
-                android:layout_gravity="center"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textSize="16sp"
-                android:text="一醉方休"/>
-        </android.support.v7.widget.ButtonBarLayout>
-    </android.support.v7.widget.Toolbar>
-</FrameLayout>
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/top_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/image_weibo_home_1"
+                    android:contentDescription="@null" />
+
+                <com.nyq.projecttreasure.views.FixedGridView
+                    android:id="@+id/gv_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_8"
+                    android:fadeScrollbars="true"
+                    android:horizontalSpacing="@dimen/dp_8"
+                    android:numColumns="2"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="@dimen/dp_8" />
+
+            </LinearLayout>
+        </com.nyq.projecttreasure.views.ObservableScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/fake_status_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/statusbar_view_height"
+                android:background="@color/transparent" />
+            <!--透明标题栏-->
+            <include layout="@layout/nav_back_transparent_v2" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

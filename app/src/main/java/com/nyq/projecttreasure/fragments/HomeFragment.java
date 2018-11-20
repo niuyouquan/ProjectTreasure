@@ -2,16 +2,13 @@ package com.nyq.projecttreasure.fragments;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
@@ -19,18 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.adapter.AppAdapter;
 import com.nyq.projecttreasure.adapter.ViewPagerFragmentAdapter;
 import com.nyq.projecttreasure.models.AppInfo;
 import com.nyq.projecttreasure.models.InfoColumn;
-import com.nyq.projecttreasure.models.Item;
 import com.nyq.projecttreasure.utils.GlideImageLoader;
 import com.nyq.projecttreasure.utils.StringHelper;
 import com.nyq.projecttreasure.views.FixedGridView;
@@ -58,14 +49,6 @@ import butterknife.Unbinder;
 public class HomeFragment extends Fragment {
 
     Unbinder unbinder;
-    @BindView(R.id.back)
-    ImageView back;
-    @BindView(R.id.title)
-    TextView title;
-    @BindView(R.id.menu)
-    TextView menu;
-    @BindView(R.id.toolbar)
-    RelativeLayout toolbar;
     @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.toolbarLayout)
@@ -86,7 +69,6 @@ public class HomeFragment extends Fragment {
     private ClassicsHeader mClassicsHeader;
     private Drawable mDrawableProgress;
     private List<String> BANNER_ITEMS = new ArrayList<>();
-    private QuickAdapter mAdpater;
     private AppAdapter appAdapter;
     private List<AppInfo> appList;
     private List<Fragment> listData;
@@ -113,7 +95,6 @@ public class HomeFragment extends Fragment {
     }
 
     public void initView() {
-        title.setText("嵌套滑动");
         BANNER_ITEMS.clear();
         BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg");
         BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3566.jpg");
@@ -145,15 +126,12 @@ public class HomeFragment extends Fragment {
 
         getFragmentData();
         refreshLayout.setEnableFooterFollowWhenLoadFinished(false); //设置是否在全部加载结束之后Footer跟随内容
-//        ClassicsFooter classicsFooter = (ClassicsFooter) refreshLayout.getRefreshFooter();
         mClassicsHeader = (ClassicsHeader) refreshLayout.getRefreshHeader();
         mClassicsHeader.setSpinnerStyle(SpinnerStyle.Scale);
-//        classicsFooter.setSpinnerStyle(SpinnerStyle.Scale);
         mDrawableProgress = ((ImageView) mClassicsHeader.findViewById(ClassicsHeader.ID_IMAGE_PROGRESS)).getDrawable();
         if (mDrawableProgress instanceof LayerDrawable) {
             mDrawableProgress = ((LayerDrawable) mDrawableProgress).getDrawable(0);
         }
-        setStatusBarColor(R.color.colorPrimary);
         mClassicsHeader.setAccentColor(getResources().getColor(R.color.colorPrimary));
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -169,9 +147,9 @@ public class HomeFragment extends Fragment {
         infoColumnList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             InfoColumn infoColumn = new InfoColumn();
-            infoColumn.setColumnCode(StringHelper.convertToString(""+i));
-            infoColumn.setColumnName(StringHelper.convertToString("菜单"+i));
-            infoColumn.setColumnType(StringHelper.convertToString("0"+i));
+            infoColumn.setColumnCode(StringHelper.convertToString("" + i));
+            infoColumn.setColumnName(StringHelper.convertToString("菜单" + i));
+            infoColumn.setColumnType(StringHelper.convertToString("0" + i));
             infoColumnList.add(infoColumn);
         }
 
@@ -206,21 +184,6 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    public class QuickAdapter extends BaseQuickAdapter<Item, BaseViewHolder> {
-        public QuickAdapter() {
-            super(R.layout.item_layout1);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder viewHolder, Item item) {
-            viewHolder.setText(R.id.tv1, item.getName())
-                    .setText(R.id.tv2, item.getContent());
-        }
-    }
-
-
-
-
     public List<AppInfo> getGridData() {
         appList = new ArrayList<>();
         appList.add(new AppInfo("但家香酥鸭", R.mipmap.image_practice_repast_1));
@@ -237,7 +200,6 @@ public class HomeFragment extends Fragment {
 
     //为状态栏着色
     public void setStatusBarColor(int colorRes) {
-        toolbar.setBackgroundResource(colorRes);
         refreshLayout.getLayout().setBackgroundResource(R.color.common_nomal_color);
         refreshLayout.setPrimaryColors(0, 0xff666666);
 

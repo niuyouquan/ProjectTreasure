@@ -6,7 +6,7 @@ import android.widget.GridView;
 
 /**
  * Created by niuyq on 16/4/21.
- * 没有分割线
+ * 没有分割线,不滚动
  */
 public class FixedGridView extends GridView {
 

@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.nyq.projecttreasure.R;
-import com.nyq.projecttreasure.models.HealthInfo;
 import com.nyq.projecttreasure.models.Item;
 import com.nyq.projecttreasure.utils.GlideImageLoader;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -49,7 +48,7 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 /**
  * 消息
  */
-public class MsgFragment extends Fragment implements BaseQuickAdapter.OnItemClickListener {
+public class ChenJinShiFragment extends Fragment implements BaseQuickAdapter.OnItemClickListener {
 
     Unbinder unbinder;
     @BindView(R.id.recyclerView)
@@ -70,8 +69,8 @@ public class MsgFragment extends Fragment implements BaseQuickAdapter.OnItemClic
     private QuickAdapter mAdpater;
     private List<String> BANNER_ITEMS = new ArrayList<>();
 
-    public static MsgFragment newInstance() {
-        MsgFragment fragment = new MsgFragment();
+    public static ChenJinShiFragment newInstance() {
+        ChenJinShiFragment fragment = new ChenJinShiFragment();
         return fragment;
     }
 

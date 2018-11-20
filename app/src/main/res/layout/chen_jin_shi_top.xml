@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.youth.banner.Banner
+        android:id="@+id/convenientBanner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/white"
+        app:indicator_drawable_selected="@drawable/banner_dian_focus"
+        app:indicator_drawable_unselected="@drawable/banner_dian_normal"
+        app:is_auto_play="true"></com.youth.banner.Banner>
+
+    <LinearLayout
+        android:id="@+id/toobar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/fake_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/transparent" />
+        <!--透明标题栏-->
+        <include layout="@layout/nav_back_transparent_v2" />
+    </LinearLayout>
+
+</FrameLayout>

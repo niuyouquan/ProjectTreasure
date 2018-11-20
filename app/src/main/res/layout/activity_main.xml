@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="true"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
 
-    <com.next.easynavigition.view.EasyNavigitionBar
-        android:id="@+id/navigitionBar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:Easy_addIconSize="40dp"
-        app:Easy_navigitionHeight="60dp"
-        app:Easy_addLayoutHeight="80dp"
-        app:Easy_hasPadding="false"
-        app:Easy_navigitionBackground="#90ffffff">
-    </com.next.easynavigition.view.EasyNavigitionBar>
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <com.next.easynavigition.view.EasyNavigitionBar
+            android:id="@+id/navigitionBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:Easy_addIconSize="40dp"
+            app:Easy_addLayoutHeight="80dp"
+            app:Easy_hasPadding="false"
+            app:Easy_navigitionBackground="#90ffffff"
+            app:Easy_navigitionHeight="60dp"></com.next.easynavigition.view.EasyNavigitionBar>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@color/transparent" />
+
+</FrameLayout>

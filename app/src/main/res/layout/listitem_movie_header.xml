@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/convenientBanner"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="200dp"
     app:indicator_drawable_selected="@drawable/banner_dian_focus"
     app:indicator_drawable_unselected="@drawable/banner_dian_normal"
     android:background="@color/white"

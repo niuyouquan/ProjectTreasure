@@ -20,7 +20,6 @@ import com.nyq.projecttreasure.activitys.start.LoginActivity;
 import com.nyq.projecttreasure.utils.PatternHelper;
 import com.nyq.projecttreasure.utils.SPUtils;
 import com.nyq.projecttreasure.utils.StringHelper;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,8 +47,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     TextView gywm;
     @BindView(R.id.btn_logout)
     Button btnLogout;
-    @BindView(R.id.refreshLayout)
-    SmartRefreshLayout refreshLayout;
     @BindView(R.id.switchBtn)
     SwitchButton switchBtn;
 
