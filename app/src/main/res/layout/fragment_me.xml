@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context="com.nyq.projecttreasure.fragments.MeFragment"
     tools:ignore="ResAuto">
@@ -26,9 +25,11 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
+                android:background="@color/colorPrimary"
                 android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/heardImg"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_marginTop="50dp"
@@ -41,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
                     android:text="Kanye West"
                     android:textColor="@android:color/white"
                     android:textStyle="bold" />
@@ -50,8 +52,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#22ffffff"
                 android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_marginTop="1dp"
                 android:paddingBottom="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
@@ -81,7 +84,8 @@
                 android:id="@+id/szssmm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#44ffffff"
+                android:background="@color/white"
+                android:layout_marginTop="1dp"
                 android:drawableEnd="@mipmap/right_advance"
                 android:drawableLeft="@mipmap/syss"
                 android:drawablePadding="10dp"
@@ -100,7 +104,8 @@
                 android:id="@+id/bzfk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#77ffffff"
+                android:background="@color/white"
+                android:layout_marginTop="1dp"
                 android:drawableEnd="@mipmap/right_advance"
                 android:drawableLeft="@mipmap/icon_order_record"
                 android:drawablePadding="10dp"
@@ -119,7 +124,8 @@
                 android:id="@+id/yssm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#aaffffff"
+                android:background="@color/white"
+                android:layout_marginTop="1dp"
                 android:drawableEnd="@mipmap/right_advance"
                 android:drawableLeft="@mipmap/icon_order_record"
                 android:drawablePadding="10dp"
@@ -138,7 +144,8 @@
                 android:id="@+id/gywm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ddffffff"
+                android:background="@color/white"
+                android:layout_marginTop="1dp"
                 android:drawableEnd="@mipmap/right_advance"
                 android:drawableLeft="@mipmap/icon_order_record"
                 android:drawablePadding="10dp"
@@ -153,15 +160,15 @@
                 android:textColor="#333333"
                 android:textSize="@dimen/dp_16" />
 
-
             <Button
                 android:id="@+id/btn_logout"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#eeffffff"
+                android:background="@color/white"
+                android:layout_marginTop="1dp"
                 android:text="退出登录"
-                android:textColor="#333333"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/dp_16" />
 
         </LinearLayout>

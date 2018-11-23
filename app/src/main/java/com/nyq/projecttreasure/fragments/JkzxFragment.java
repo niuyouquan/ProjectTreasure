@@ -19,12 +19,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.activitys.main.ChenjinshiActivity;
+import com.nyq.projecttreasure.adapter.ViewPagerFragmentAdapter;
 import com.nyq.projecttreasure.models.HealthInfo;
 import com.nyq.projecttreasure.utils.LogUtil;
 import com.nyq.projecttreasure.utils.StringHelper;
 import com.nyq.projecttreasure.utils.TimeHelper;
 import com.nyq.projecttreasure.views.DividerItemDecoration;
 import com.nyq.projecttreasure.views.MLImageView;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,22 +46,12 @@ public class JkzxFragment extends Fragment {
     private static int pageSize = 10;
     private int pageNum = 1;
     JkzxAdapter mAdapter;
-    private static final String COLUMN_CODE = "column_code";
-    private static final String COLUMN_NAME = "column_name";
-    private static final String COLUMN_re= "refreshLayout";
 
     private List<HealthInfo> healthInfos;
     private List<HealthInfo> healthInfosMore = new ArrayList<>();
-    private String columnCode;
-    private String columnName;
-    String name;
 
-    public static JkzxFragment newInstance(String columnCode, String columnName) {
-        Bundle args = new Bundle();
-        args.putString(COLUMN_CODE, columnCode);
-        args.putString(COLUMN_NAME, columnName);
+    public static JkzxFragment newInstance() {
         JkzxFragment tripFragment = new JkzxFragment();
-        tripFragment.setArguments(args);
         return tripFragment;
     }
 
@@ -67,8 +60,6 @@ public class JkzxFragment extends Fragment {
         super.onCreate(savedInstanceState);
         healthInfosMore.clear();
         getInfoList();
-        columnCode = getArguments().getString(COLUMN_CODE);
-        columnName = getArguments().getString(COLUMN_NAME);
     }
 
     @Nullable
@@ -102,10 +93,22 @@ public class JkzxFragment extends Fragment {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Log.e("position：",position+"");
-                Toast.makeText(getContext(), columnName+"    "+healthInfosMore.get(position).getTitle(), Toast.LENGTH_SHORT).show();
-                if (position == 5){
+                String name = healthInfosMore.get(position).getTitle();
+                if (position == 0){
                     startActivity(new Intent(getContext(), ChenjinshiActivity.class));
+                    getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
+                } else {
+                    if (name.equals("默认主题")) {
+                        setStatusBarColor(R.color.half_transparent);
+                    } else if (name.equals("橙色主题")) {
+                        setStatusBarColor(android.R.color.holo_orange_light);
+                    } else if (name.equals("红色主题")) {
+                        setStatusBarColor(android.R.color.holo_red_light);
+                    } else if (name.equals("绿色主题")) {
+                        setStatusBarColor(android.R.color.holo_green_light);
+                    } else if (name.equals("蓝色主题")) {
+                        setStatusBarColor(R.color.colorPrimary);
+                    }
                 }
             }
         });
@@ -114,15 +117,22 @@ public class JkzxFragment extends Fragment {
 
     }
 
+    //为状态栏着色
+    public void setStatusBarColor(int colorRes) {
+        SystemBarTintManager tintManager = new SystemBarTintManager(getActivity());
+        tintManager.setStatusBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(colorRes);
+    }
+
     //从网络获取数据
     private void getInfoList() {
         healthInfos = new ArrayList<>();
+        healthInfos.add(new HealthInfo("Activity沉浸式", new Date().toString(),"Activity内容入嵌沉浸式","http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
         healthInfos.add(new HealthInfo("默认主题", new Date().toString(),getResources().getString(R.string.item_style_theme_default_abstract),"http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
         healthInfos.add(new HealthInfo("橙色主题", new Date().toString(),getResources().getString(R.string.item_style_theme_orange_abstract),"http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
         healthInfos.add(new HealthInfo("红色主题", new Date().toString(),getResources().getString(R.string.item_style_theme_red_abstract),"http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
         healthInfos.add(new HealthInfo("绿色主题", new Date().toString(),getResources().getString(R.string.item_style_theme_green_abstract),"http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
         healthInfos.add(new HealthInfo("蓝色主题", new Date().toString(),getResources().getString(R.string.item_style_theme_blue_abstract),"http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("Activity沉浸式", new Date().toString(),getResources().getString(R.string.item_style_theme_blue_abstract),"http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
         healthInfosMore.addAll(healthInfos);
     }
 

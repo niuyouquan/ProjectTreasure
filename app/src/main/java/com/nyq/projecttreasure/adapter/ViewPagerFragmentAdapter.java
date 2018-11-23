@@ -23,6 +23,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.nyq.projecttreasure.fragments.JkzxFragment;
 import com.nyq.projecttreasure.models.InfoColumn;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,53 +35,47 @@ import java.util.List;
  */
 public class ViewPagerFragmentAdapter extends FragmentPagerAdapter {
 
-    private List<Fragment> listData;
-
+    private List<Fragment> fragmentList;
     private List<InfoColumn> list;
-
 
     public ViewPagerFragmentAdapter(FragmentManager fm) {
         super(fm);
         this.list = new ArrayList<>();
+        this.fragmentList =  new ArrayList<>();
     }
 
-    public ViewPagerFragmentAdapter(FragmentManager fm, List<Fragment> listData){
-        this(fm,listData,null);
-    }
-
-    public ViewPagerFragmentAdapter(FragmentManager fm, List<Fragment> listData, List<InfoColumn> list) {
+    public ViewPagerFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList){
         super(fm);
-        this.listData = listData;
+        this.fragmentList = fragmentList;
+    }
+
+    public ViewPagerFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList, List<InfoColumn> list) {
+        super(fm);
+        this.fragmentList = fragmentList;
         this.list = list;
     }
 
-    public List<Fragment> getListData() {
-        return listData;
+    public void setListData(List<Fragment> fragmentList) {
+        this.fragmentList = fragmentList;
     }
 
-    public void setListData(List<Fragment> listData) {
-        this.listData = listData;
+    public List<Fragment> getListData() {
+        return fragmentList;
+    }
+
+    public void setList(List<InfoColumn> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        notifyDataSetChanged();
     }
 
     public List<InfoColumn> getList() {
         return list;
     }
 
-    public void setList(List<InfoColumn> list) {
-//        this.list = list;
-        this.list.clear();
-        this.list.addAll(list);
-        notifyDataSetChanged();
-    }
-
     @Override
     public Fragment getItem(int position) {
-//        return listData==null ? null : listData.get(position) ;
-        JkzxFragment fragment = new JkzxFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("name", list.get(position).getColumnName());
-        fragment.setArguments(bundle);
-        return fragment;
+        return fragmentList.get(position);
     }
 
     @Override
@@ -90,7 +86,6 @@ public class ViewPagerFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-//        return list.get(position).getColumnName();
         String plateName = list.get(position).getColumnName();
         if (plateName == null) {
             plateName = "";

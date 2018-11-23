@@ -1,70 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/refreshLayout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    app:srlEnablePreviewInEditMode="false">
+    android:orientation="vertical">
 
-    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+    <include layout="@layout/top_title_layout"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srlAccentColor="@color/normal_blue" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.nyq.projecttreasure.views.ObservableScrollView
-            android:id="@+id/osv"
+        <TextView
+            android:id="@+id/time_tv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
+            android:layout_height="40dp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:scrollbars="none">
+            android:text="请选择日期"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/dp_10"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
+        <TextView
+            android:id="@+id/address_tv"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="请选择地址"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/dp_10"/>
 
-                <ImageView
-                    android:id="@+id/top_banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/image_weibo_home_1"
-                    android:contentDescription="@null" />
+        <TextView
+            android:id="@+id/more_img"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="拍照、图片选择"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/dp_10" />
 
-                <com.nyq.projecttreasure.views.FixedGridView
-                    android:id="@+id/gv_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_8"
-                    android:fadeScrollbars="true"
-                    android:horizontalSpacing="@dimen/dp_8"
-                    android:numColumns="2"
-                    android:stretchMode="columnWidth"
-                    android:verticalSpacing="@dimen/dp_8" />
-
-            </LinearLayout>
-        </com.nyq.projecttreasure.views.ObservableScrollView>
-
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/white"
+            android:padding="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_60"/>
 
-            <View
-                android:id="@+id/fake_status_bar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/statusbar_view_height"
-                android:background="@color/transparent" />
-            <!--透明标题栏-->
-            <include layout="@layout/nav_back_transparent_v2" />
-        </LinearLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

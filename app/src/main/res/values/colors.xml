@@ -93,6 +93,7 @@
 
     <color name="text_color_b4b4b4">#b4b4b4</color>
     <color name="transparent">#00000000</color>
+    <color name="half_transparent">#8f000000</color>
 
     <!-- 二维码边框颜色 -->
     <color name="scan_corner_color">#0effc2</color>
@@ -111,6 +112,8 @@
     <color name="pickerview_wheelview_textcolor_center">#2a2a2a</color>
     <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
     <color name="selector_grey">#DDDDDD</color>
+
+    <color name="__picker_item_photo_border_n">#33ffffff</color>
 
     <color name="font_black_6">#e0e0e0</color>
     <color name="white_60">#60ffffff</color>

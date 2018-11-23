@@ -203,7 +203,7 @@ public class ApkUpdateManager {
         //判读版本是否在7.0以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //在AndroidManifest中的android:authorities值
-            Uri apkUri = FileProvider.getUriForFile(mContext, "com.nyq.myrecycleviewdemo.provider", apkfile);
+            Uri apkUri = FileProvider.getUriForFile(mContext, "com.nyq.projecttreasure.provider", apkfile);
             Intent install = new Intent(Intent.ACTION_VIEW);
             install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             //添加这一句表示对目标应用临时授权该Uri所代表的文件

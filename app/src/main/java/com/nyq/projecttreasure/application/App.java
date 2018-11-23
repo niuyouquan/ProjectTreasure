@@ -5,8 +5,13 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.okhttp.OkhttpUtil;
 import com.nyq.projecttreasure.utils.RootProxyUtil;
+import com.rain.library.PhotoPick;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
 
 import org.xutils.x;
@@ -88,7 +93,12 @@ public class App extends Application {
 //         * 二维码
 //         */
 //        ZXingLibrary.initDisplayOpinion(this);
-//
+
+        /**
+         * 图片选择
+         */
+        PhotoPick.init(getApplicationContext(),R.color.colorPrimary);
+
         /**
          * zhy的okhttp网络框架
          * 注册OkHttp请求http请求
@@ -107,6 +117,23 @@ public class App extends Application {
                 .writeTimeout(15000L, TimeUnit.SECONDS)
                 .build();
         OkhttpUtil.initClient(okHttpClient);
+
+        DisplayImageOptions defaultOptions = new DisplayImageOptions
+                .Builder()
+                .showImageForEmptyUri(R.mipmap.error_image)
+                .showImageOnFail(R.mipmap.error_image)
+                .cacheInMemory(true)
+                .cacheOnDisc(true)
+                .build();
+//
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration
+                .Builder(getApplicationContext())
+                .defaultDisplayImageOptions(defaultOptions)
+                .discCacheSize(50 * 1024 * 1024)//
+                .discCacheFileCount(100)//缓存一百张图片
+                .writeDebugLogs()
+                .build();
+        ImageLoader.getInstance().init(config);
     }
 
     public static Context getContextObject() {

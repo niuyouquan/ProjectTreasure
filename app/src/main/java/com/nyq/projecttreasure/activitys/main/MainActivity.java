@@ -1,6 +1,7 @@
 package com.nyq.projecttreasure.activitys.main;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -40,7 +41,7 @@ public class MainActivity extends BaseActivity {
     EasyNavigitionBar navigitionBar;
 
     private long exitTime;
-    private String[] tabText = {"首页", "发现","消息", "我的"};
+    private String[] tabText = {"首页", "消息", "发现", "我的"};
     //未选中icon
     private int[] normalIcon = {R.mipmap.index, R.mipmap.find, R.mipmap.message, R.mipmap.me};
     //选中时icon
@@ -56,8 +57,8 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         fragments.add(HomeFragment.newInstance());
-        fragments.add(FindFragment.newInstance());
         fragments.add(MsgFragment.newInstance());
+        fragments.add(FindFragment.newInstance());
         fragments.add(MeFragment.newInstance());
 
 
@@ -107,6 +108,21 @@ public class MainActivity extends BaseActivity {
 
     public EasyNavigitionBar getNavigitionBar() {
         return navigitionBar;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 1.使用getSupportFragmentManager().getFragments()获取到当前Activity中添加的Fragment集合
+         * 2.遍历Fragment集合，手动调用在当前Activity中的Fragment中的onActivityResult()方法。
+         */
+        if (getSupportFragmentManager().getFragments() != null && getSupportFragmentManager().getFragments().size() > 0) {
+            List<Fragment> fragments = getSupportFragmentManager().getFragments();
+            for (Fragment mFragment : fragments) {
+                mFragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
     }
 
     @Override

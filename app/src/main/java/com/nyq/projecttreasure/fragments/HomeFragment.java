@@ -17,12 +17,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.adapter.AppAdapter;
 import com.nyq.projecttreasure.adapter.ViewPagerFragmentAdapter;
 import com.nyq.projecttreasure.models.AppInfo;
 import com.nyq.projecttreasure.models.InfoColumn;
-import com.nyq.projecttreasure.utils.GlideImageLoader;
+import com.nyq.projecttreasure.utils.BannerGlideImageLoader;
 import com.nyq.projecttreasure.utils.StringHelper;
 import com.nyq.projecttreasure.views.FixedGridView;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -71,7 +72,7 @@ public class HomeFragment extends Fragment {
     private List<String> BANNER_ITEMS = new ArrayList<>();
     private AppAdapter appAdapter;
     private List<AppInfo> appList;
-    private List<Fragment> listData;
+    private List<Fragment> fragmentList;
     private ViewPagerFragmentAdapter viewPagerFragmentAdapter;
     private List<InfoColumn> infoColumnList;
 
@@ -102,7 +103,7 @@ public class HomeFragment extends Fragment {
         BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3757.jpg");
         // 设置banner动画效果
         banner.setBannerAnimation(Transformer.DepthPage);
-        banner.setImageLoader(new GlideImageLoader());
+        banner.setImageLoader(BannerGlideImageLoader.init());
         //设置banner样式
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         banner.setImages(BANNER_ITEMS);
@@ -123,8 +124,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "fixedGridView  " + position, Toast.LENGTH_SHORT).show();
             }
         });
-
-        getFragmentData();
         refreshLayout.setEnableFooterFollowWhenLoadFinished(false); //设置是否在全部加载结束之后Footer跟随内容
         mClassicsHeader = (ClassicsHeader) refreshLayout.getRefreshHeader();
         mClassicsHeader.setSpinnerStyle(SpinnerStyle.Scale);
@@ -138,9 +137,11 @@ public class HomeFragment extends Fragment {
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 getFragmentData();
                 refreshLayout.finishRefresh();
-                refreshLayout.setNoMoreData(false);//恢复上拉状态
+                refreshLayout.setNoMoreData(true);//恢复上拉状态
             }
         });
+
+        getFragmentData();
     }
 
     public void getFragmentData() {
@@ -153,22 +154,22 @@ public class HomeFragment extends Fragment {
             infoColumnList.add(infoColumn);
         }
 
-        listData = new ArrayList<>();
+        fragmentList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            listData.add(JkzxFragment.newInstance(infoColumnList.get(i).getColumnCode(), infoColumnList.get(i).getColumnName()));
+            fragmentList.add(JkzxFragment.newInstance());
         }
         viewPagerFragmentAdapter = new ViewPagerFragmentAdapter(getChildFragmentManager());
         viewpager.setAdapter(viewPagerFragmentAdapter);
         tlMainTabtop.setupWithViewPager(viewpager);
         // 更新适配器数据
         viewPagerFragmentAdapter.setList(infoColumnList);
+        viewPagerFragmentAdapter.setListData(fragmentList);
 //        app:tabMode="fixed"
         tlMainTabtop.setTabMode(TabLayout.MODE_FIXED);
         viewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tlMainTabtop));
         tlMainTabtop.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                // 取消平滑切换
                 viewpager.setCurrentItem(tab.getPosition(), false);
             }
 
@@ -182,6 +183,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
     }
 
     public List<AppInfo> getGridData() {
@@ -213,5 +215,4 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
     }
-
 }

@@ -42,9 +42,13 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.1'
     //最新版本
     implementation 'com.github.jdsjlzx:LRecyclerView:1.4.3'
-    //最新版本
-    implementation 'com.github.bumptech.glide:glide:4.0.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    //图片加载框架
+    //    implementation 'com.github.bumptech.glide:glide:4.0.0'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+//    implementation 'com.github.bumptech.glide:glide:4.5.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+
     //改变状态栏颜色
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     // 检查更新，安装apk权限依赖
@@ -62,6 +66,10 @@ dependencies {
     implementation 'me.panpf:switch-button:2.0.0'
     //手势密码
     implementation 'com.github.ihsg:PatternLocker:2.1.0'
+    //图片选择
+    implementation 'com.github.yudu233:PhotoPicker:1.5.0'
+    //时间、地域选择
+    implementation 'com.contrarywind:Android-PickerView:4.1.6'
     //1.1.0 API改动过大，老用户升级需谨慎
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'
@@ -71,4 +79,5 @@ dependencies {
     //    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'//没有使用特殊Header，可以不加这行
     //    compile 'com.android.support:appcompat-v7:25.3.1'//版本 23以上（必须）
     //    compile 'com.android.support:design:25.3.1'//版本随意（非必须，引用可以解决无法预览问题）
+    implementation files('libs/universal-image-loader-1.9.1.jar')
 }

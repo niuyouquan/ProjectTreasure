@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">项目宝</string>
-
     <!-- 公用 -->
     <string name="common_img_tips">图片</string>
     <string name="common_loading_dialog_loading">loading&#8230;</string>
+    <string name="viewpager_indicator">%1$d/%2$d</string>
 
     <string name="item_style_theme_default_abstract">更改为默认主题颜色</string>
     <string name="item_style_theme_orange_abstract">更改为橙色主题颜色</string>

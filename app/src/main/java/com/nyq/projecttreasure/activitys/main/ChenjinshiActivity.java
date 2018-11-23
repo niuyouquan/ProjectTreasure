@@ -1,8 +1,6 @@
 package com.nyq.projecttreasure.activitys.main;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +19,9 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.base.BaseActivity;
 import com.nyq.projecttreasure.models.HealthInfo;
+import com.nyq.projecttreasure.utils.BannerGlideImageLoader;
 import com.nyq.projecttreasure.utils.ColorUtil;
 import com.nyq.projecttreasure.utils.DensityUtil;
-import com.nyq.projecttreasure.utils.GlideImageLoader;
 import com.nyq.projecttreasure.utils.StatusBarUtil;
 import com.nyq.projecttreasure.utils.StringHelper;
 import com.nyq.projecttreasure.utils.TimeHelper;
@@ -32,11 +29,7 @@ import com.nyq.projecttreasure.views.DividerItemDecoration;
 import com.nyq.projecttreasure.views.MLImageView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -144,7 +137,7 @@ public class ChenjinshiActivity extends BaseActivity {
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         // 设置banner动画效果
         banner.setBannerAnimation(Transformer.DepthPage);
-        banner.setImageLoader(new GlideImageLoader());
+        banner.setImageLoader(BannerGlideImageLoader.init());
         banner.setImages(BANNER_ITEMS);
         banner.setDelayTime(3000);
         banner.start();

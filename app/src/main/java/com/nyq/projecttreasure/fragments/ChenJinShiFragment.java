@@ -22,7 +22,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.models.Item;
-import com.nyq.projecttreasure.utils.GlideImageLoader;
+import com.nyq.projecttreasure.utils.BannerGlideImageLoader;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -164,7 +164,7 @@ public class ChenJinShiFragment extends Fragment implements BaseQuickAdapter.OnI
             banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
             // 设置banner动画效果
             banner.setBannerAnimation(Transformer.DepthPage);
-            banner.setImageLoader(new GlideImageLoader());
+            banner.setImageLoader(BannerGlideImageLoader.init());
             banner.setImages(BANNER_ITEMS);
             banner.setDelayTime(3000);
             banner.start();
