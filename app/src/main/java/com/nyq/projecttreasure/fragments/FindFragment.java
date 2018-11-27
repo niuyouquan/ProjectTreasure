@@ -22,12 +22,11 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.contrarywind.interfaces.IPickerViewData;
 import com.nyq.projecttreasure.R;
-import com.nyq.projecttreasure.selectphoto.MorePhotoAdapter;
-import com.nyq.projecttreasure.selectphoto.RecyclerItemClickListener;
 import com.nyq.projecttreasure.models.CityBean;
 import com.nyq.projecttreasure.models.PickerViewData;
 import com.nyq.projecttreasure.models.ProvinceBean;
 import com.nyq.projecttreasure.selectphoto.GlideImageLoader;
+import com.nyq.projecttreasure.selectphoto.MorePhotoAdapter;
 import com.nyq.projecttreasure.selectphoto.lookbigImage.ImagePagerActivity;
 import com.nyq.projecttreasure.utils.StringHelper;
 import com.rain.library.controller.PhotoPickConfig;
@@ -62,6 +61,8 @@ public class FindFragment extends Fragment {
     TextView moreImg;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.menu)
+    TextView menu;
 
     private TimePickerView pvTime;
     private OptionsPickerView pvOptions;
@@ -101,43 +102,33 @@ public class FindFragment extends Fragment {
         photoAdapter = new MorePhotoAdapter(getContext());
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, OrientationHelper.VERTICAL));
         recyclerView.setAdapter(photoAdapter);
-        recyclerView.setOnLongClickListener(new View.OnLongClickListener() {
+        photoAdapter.setOnItemClickListener(new MorePhotoAdapter.onItemListener() {
             @Override
-            public boolean onLongClick(View v) {
-
-                return false;
-            }
-        });
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(),
-                new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        if (photoAdapter.getItemViewType(position) == MorePhotoAdapter.TYPE_ADD) {
-                            new PhotoPickConfig
-                                    .Builder(getActivity())
-                                    .imageLoader(GlideImageLoader.init())                //图片加载方式，支持任意第三方图片加载库
-                                    .spanCount(PhotoPickConfig.GRID_SPAN_COUNT)         //相册列表每列个数，默认为3
-                                    .pickMode(PhotoPickConfig.MODE_PICK_MORE)           //设置照片选择模式为单选，默认为单选
-                                    .maxPickSize(9)   //多选时可以选择的图片数量，默认为1张
-                                    .showCamera(true)           //是否展示相机icon，默认展示
-                                    .clipPhoto(false)            //是否开启裁剪照片功能，默认关闭
-                                    .clipCircle(false)          //是否裁剪方式为圆形，默认为矩形
-                                    .build();
-                        } else {
-                            Intent intent = new Intent(getContext(), ImagePagerActivity.class);
-                            // 图片url,为了演示这里使用常量，一般从数据库中或网络中获取
-                            intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, photoLists);
-                            intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
-                            getContext().startActivity(intent);
-                            getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
-                        }
+            public void onItemClick(String type, int position) {
+                if (photoAdapter.getItemViewType(position) == MorePhotoAdapter.TYPE_ADD) {
+                    new PhotoPickConfig
+                            .Builder(getActivity())
+                            .imageLoader(GlideImageLoader.init())                //图片加载方式，支持任意第三方图片加载库
+                            .spanCount(PhotoPickConfig.GRID_SPAN_COUNT)         //相册列表每列个数，默认为3
+                            .pickMode(PhotoPickConfig.MODE_PICK_MORE)           //设置照片选择模式为单选，默认为单选
+                            .maxPickSize(9)   //多选时可以选择的图片数量，默认为1张
+                            .showCamera(true)           //是否展示相机icon，默认展示
+                            .clipPhoto(false)            //是否开启裁剪照片功能，默认关闭
+                            .clipCircle(false)          //是否裁剪方式为圆形，默认为矩形
+                            .build();
+                } else {
+                    if (type.equals("bigImage")) {
+                        Intent intent = new Intent(getContext(), ImagePagerActivity.class);
+                        // 图片url,为了演示这里使用常量，一般从数据库中或网络中获取
+                        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, photoLists);
+                        intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_INDEX, position);
+                        getContext().startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
+                    } else if (type.equals("delete")) {
+                        photoLists.remove(position);
+                        photoAdapter.refresh(photoLists);
                     }
-                }));
-        photoAdapter.setOnDeleteClickListener(new MorePhotoAdapter.onDeleteListener() {
-            @Override
-            public void onDeleteClick(int position) {
-                photoLists.remove(position);
-                photoAdapter.refresh(photoLists);
+                }
             }
         });
     }
@@ -356,8 +347,5 @@ public class FindFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-
     }
-
-
 }

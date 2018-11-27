@@ -22,7 +22,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@mipmap/delete" />
+        android:src="@mipmap/delete"
+        android:visibility="gone"/>
 
 
 </com.nyq.projecttreasure.selectphoto.SquareItemLayout>

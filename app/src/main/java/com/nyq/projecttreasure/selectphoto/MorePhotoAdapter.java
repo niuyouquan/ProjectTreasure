@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nyq.projecttreasure.R;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class MorePhotoAdapter extends RecyclerView.Adapter<MorePhotoAdapter.PhotoPickViewHolder> {
 
-    private MorePhotoAdapter.onDeleteListener mOnDeleteListener;
+    private MorePhotoAdapter.onItemListener mOnItemListener;
     private Context context;
     private LayoutInflater inflater;
     private List<String> photos = new ArrayList<>();
@@ -59,10 +60,34 @@ public class MorePhotoAdapter extends RecyclerView.Adapter<MorePhotoAdapter.Phot
             if (getItemViewType(position) == TYPE_PHOTO) {
                 String photoPath = photos.get(position);
                 Glide.with(context).load(photoPath).into(holder.imageView);
+
+                holder.imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnItemListener.onItemClick("bigImage",position);
+                    }
+                });
+
+                holder.imageView.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        holder.delete.setVisibility(View.VISIBLE);
+                        return true;
+                    }
+                });
+
                 holder.delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnDeleteListener.onDeleteClick(position);
+                        mOnItemListener.onItemClick("delete",position);
+                        holder.delete.setVisibility(View.GONE);
+                    }
+                });
+            } else {
+                holder.addTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnItemListener.onItemClick("add",position);
                     }
                 });
             }
@@ -77,11 +102,11 @@ public class MorePhotoAdapter extends RecyclerView.Adapter<MorePhotoAdapter.Phot
         return count;
     }
 
-    public interface onDeleteListener {
-        void onDeleteClick(int position);
+    public interface onItemListener {
+        void onItemClick(String type, int position);
     }
-    public void setOnDeleteClickListener(MorePhotoAdapter.onDeleteListener mOnDeleteListener) {
-        this.mOnDeleteListener = mOnDeleteListener;
+    public void setOnItemClickListener(onItemListener mOnItemListener) {
+        this.mOnItemListener = mOnItemListener;
     }
 
 
@@ -89,11 +114,13 @@ public class MorePhotoAdapter extends RecyclerView.Adapter<MorePhotoAdapter.Phot
 
         private ImageView imageView;
         private ImageView delete;
+        private TextView addTv;
 
         public PhotoPickViewHolder(View view) {
             super(view);
             imageView = itemView.findViewById(R.id.giv_image);
             delete = itemView.findViewById(R.id.delete);
+            addTv = itemView.findViewById(R.id.addTv);
         }
     }
 }
