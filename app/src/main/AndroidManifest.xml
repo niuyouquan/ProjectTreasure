@@ -116,7 +116,10 @@
         <activity
             android:name=".selectphoto.lookbigImage.ImagePagerActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".cehuacaidan.CeHuaCaiDanActivity"></activity>
+        <activity android:name=".cehuacaidan.CeHuaCaiDanActivity"
+            android:label="Item侧滑菜单 or 删除"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>

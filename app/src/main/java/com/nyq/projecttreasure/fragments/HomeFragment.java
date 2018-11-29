@@ -123,7 +123,7 @@ public class HomeFragment extends Fragment {
         fixedGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (getGridData().get(position).getName().equals("侧滑菜单")) {
+                if (position == 0) {
                     Intent intent = new Intent(getContext(), CeHuaCaiDanActivity.class);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
