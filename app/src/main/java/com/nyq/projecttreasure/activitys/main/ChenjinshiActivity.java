@@ -29,6 +29,7 @@ import com.nyq.projecttreasure.views.DividerItemDecoration;
 import com.nyq.projecttreasure.views.MLImageView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -62,10 +63,8 @@ public class ChenjinshiActivity extends BaseActivity {
 //    private ClassicsHeader mClassicsHeader;
 //    private Drawable mDrawableProgress;
     private List<HealthInfo> healthInfos;
-    private List<HealthInfo> healthInfosMore = new ArrayList<>();
     private JkzxAdapter mAdapter;
-    private int mOffset = 0;
-    private int mScrollY = 0;
+    private int pageNumber = 1;
 
 
     private int adViewHeight = 180; // 广告视图的高度
@@ -82,6 +81,7 @@ public class ChenjinshiActivity extends BaseActivity {
         ButterKnife.bind(this);
         initToobarView();
         initSmartRefreshLayout();
+        getInfoList();
     }
 
     public void initToobarView() {
@@ -104,6 +104,7 @@ public class ChenjinshiActivity extends BaseActivity {
         getInfoList();
         refreshLayout.setEnableFooterFollowWhenLoadFinished(true); //设置是否在全部加载结束之后Footer跟随内容
         refreshLayout.setEnableHeaderTranslationContent(false);
+        refreshLayout.setEnableLoadMore(false);
         // <!--金典刷新-->
 //        mClassicsHeader = (ClassicsHeader) refreshLayout.getRefreshHeader();
 //        mClassicsHeader.setSpinnerStyle(SpinnerStyle.FixedBehind);
@@ -112,7 +113,6 @@ public class ChenjinshiActivity extends BaseActivity {
 //            mDrawableProgress = ((LayerDrawable) mDrawableProgress).getDrawable(0);
 //        }
 //        mClassicsHeader.setAccentColor(getResources().getColor(R.color.colorPrimary));
-        refreshLayout.setEnableLoadMore(false);
 
         recyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL_LIST));
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
@@ -124,6 +124,7 @@ public class ChenjinshiActivity extends BaseActivity {
         mAdapter.openLoadAnimation();
         recyclerView.setAdapter(mAdapter);
         mAdapter.replaceData(healthInfos);
+
 
         BANNER_ITEMS.clear();
         BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg");
@@ -142,7 +143,6 @@ public class ChenjinshiActivity extends BaseActivity {
         banner.setDelayTime(3000);
         banner.start();
         mAdapter.addHeaderView(banner);
-        mAdapter.openLoadAnimation();
 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -150,10 +150,11 @@ public class ChenjinshiActivity extends BaseActivity {
                 refreshLayout.getLayout().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        pageNumber = 1;
                         getInfoList();
                         mAdapter.replaceData(healthInfos);
                         refreshLayout.finishRefresh();
-                        refreshLayout.setNoMoreData(false);//恢复上拉状态
+                        refreshLayout.setNoMoreData(false);
                         mAdapter.setEnableLoadMore(true);
                     }
                 }, 2000);
@@ -163,15 +164,21 @@ public class ChenjinshiActivity extends BaseActivity {
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-                if (mAdapter.getData().size() > 15) {
-                    Toast.makeText(activity, "数据全部加载完毕", Toast.LENGTH_SHORT).show();
-                    mAdapter.setEnableLoadMore(false);
-                } else {
-                    getInfoList();
-                    mAdapter.addData(healthInfos);
-                    mAdapter.setEnableLoadMore(true);
-                    mAdapter.loadMoreComplete();
-                }
+                recyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        pageNumber ++;
+                        if (pageNumber > 4) {
+                            Toast.makeText(activity, "数据全部加载完毕", Toast.LENGTH_SHORT).show();
+                            mAdapter.setEnableLoadMore(false);
+                        } else {
+                            getInfoList();
+                            mAdapter.addData(healthInfos);
+                            mAdapter.setEnableLoadMore(true);
+                            mAdapter.loadMoreComplete();
+                        }
+                    }
+                }, 2000);
             }
         }, recyclerView);
 
@@ -235,7 +242,6 @@ public class ChenjinshiActivity extends BaseActivity {
         healthInfos.add(new HealthInfo("绿色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_green_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
         healthInfos.add(new HealthInfo("蓝色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_blue_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
         healthInfos.add(new HealthInfo("Activity沉浸式", new Date().toString(), getResources().getString(R.string.item_style_theme_blue_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfosMore.addAll(healthInfos);
     }
 
     // 处理标题栏颜色渐变

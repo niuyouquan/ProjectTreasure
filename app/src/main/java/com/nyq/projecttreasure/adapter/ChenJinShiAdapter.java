@@ -21,11 +21,11 @@ import java.util.Date;
  * 医保报销列表适配器
  */
 
-public class MedicalInsuranceAdapter extends ListBaseAdapter<HealthInfo> {
+public class ChenJinShiAdapter extends ListBaseAdapter<HealthInfo> {
 
     private Context context;
 
-    public MedicalInsuranceAdapter(Context context) {
+    public ChenJinShiAdapter(Context context) {
         super(context);
         this.context = context;
     }

@@ -1,5 +1,6 @@
 package com.nyq.projecttreasure.fragments;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.adapter.AppAdapter;
 import com.nyq.projecttreasure.adapter.ViewPagerFragmentAdapter;
+import com.nyq.projecttreasure.cehuacaidan.CeHuaCaiDanActivity;
 import com.nyq.projecttreasure.models.AppInfo;
 import com.nyq.projecttreasure.models.InfoColumn;
 import com.nyq.projecttreasure.utils.BannerGlideImageLoader;
@@ -121,7 +123,13 @@ public class HomeFragment extends Fragment {
         fixedGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), "fixedGridView  " + position, Toast.LENGTH_SHORT).show();
+                if (getGridData().get(position).getName().equals("侧滑菜单")) {
+                    Intent intent = new Intent(getContext(), CeHuaCaiDanActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
+                } else {
+                    Toast.makeText(getContext(), "fixedGridView  " + position, Toast.LENGTH_SHORT).show();
+                }
             }
         });
         refreshLayout.setEnableFooterFollowWhenLoadFinished(false); //设置是否在全部加载结束之后Footer跟随内容
@@ -188,7 +196,7 @@ public class HomeFragment extends Fragment {
 
     public List<AppInfo> getGridData() {
         appList = new ArrayList<>();
-        appList.add(new AppInfo("但家香酥鸭", R.mipmap.image_practice_repast_1));
+        appList.add(new AppInfo("侧滑菜单", R.mipmap.image_practice_repast_1));
         appList.add(new AppInfo("香菇蒸鸟蛋", R.mipmap.image_practice_repast_2));
         appList.add(new AppInfo("花溪牛肉粉", R.mipmap.image_practice_repast_3));
         appList.add(new AppInfo("破酥包", R.mipmap.image_practice_repast_4));
