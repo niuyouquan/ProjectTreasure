@@ -79,7 +79,6 @@ public class ChenjinshiActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chenjinshi);
         ButterKnife.bind(this);
-        setStatusBarColor(R.color.colorPrimary);
         initToobarView();
         initSmartRefreshLayout();
         getInfoList();
