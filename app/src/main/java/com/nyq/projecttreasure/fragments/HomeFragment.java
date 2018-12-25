@@ -12,19 +12,25 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nyq.projecttreasure.R;
+import com.nyq.projecttreasure.activitys.baidumap.BaiDuMapActivity;
+import com.nyq.projecttreasure.activitys.erweima.QrCodeActivity;
 import com.nyq.projecttreasure.adapter.AppAdapter;
 import com.nyq.projecttreasure.adapter.ViewPagerFragmentAdapter;
 import com.nyq.projecttreasure.cehuacaidan.CeHuaCaiDanActivity;
 import com.nyq.projecttreasure.models.AppInfo;
 import com.nyq.projecttreasure.models.InfoColumn;
+import com.nyq.projecttreasure.utils.AGCache;
 import com.nyq.projecttreasure.utils.BannerGlideImageLoader;
 import com.nyq.projecttreasure.utils.StringHelper;
 import com.nyq.projecttreasure.views.FixedGridView;
@@ -68,6 +74,12 @@ public class HomeFragment extends Fragment {
     ViewPager viewpager;
     @BindView(R.id.nsv)
     NestedScrollView nsv;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_area)
+    TextView tvArea;
+    @BindView(R.id.area_layout)
+    LinearLayout areaLayout;
 
     private ClassicsHeader mClassicsHeader;
     private Drawable mDrawableProgress;
@@ -98,6 +110,8 @@ public class HomeFragment extends Fragment {
     }
 
     public void initView() {
+        setStatusBarColor(R.color.colorPrimary);
+        tvArea.setText(AGCache.CITY_NAME);
         BANNER_ITEMS.clear();
         BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg");
         BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3566.jpg");
@@ -127,6 +141,14 @@ public class HomeFragment extends Fragment {
                     Intent intent = new Intent(getContext(), CeHuaCaiDanActivity.class);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
+                } else if (position == 1) {
+                    Intent intent = new Intent(getContext(), QrCodeActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
+                } else if (position == 2) {
+                    Intent intent = new Intent(getContext(), BaiDuMapActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
                 } else {
                     Toast.makeText(getContext(), "fixedGridView  " + position, Toast.LENGTH_SHORT).show();
                 }
@@ -148,9 +170,9 @@ public class HomeFragment extends Fragment {
                 refreshLayout.setNoMoreData(true);//恢复上拉状态
             }
         });
-
         getFragmentData();
     }
+
 
     public void getFragmentData() {
         infoColumnList = new ArrayList<>();
@@ -197,9 +219,9 @@ public class HomeFragment extends Fragment {
     public List<AppInfo> getGridData() {
         appList = new ArrayList<>();
         appList.add(new AppInfo("侧滑菜单", R.mipmap.image_practice_repast_1));
-        appList.add(new AppInfo("香菇蒸鸟蛋", R.mipmap.image_practice_repast_2));
-        appList.add(new AppInfo("花溪牛肉粉", R.mipmap.image_practice_repast_3));
-        appList.add(new AppInfo("破酥包", R.mipmap.image_practice_repast_4));
+        appList.add(new AppInfo("二维码扫描", R.mipmap.image_practice_repast_2));
+        appList.add(new AppInfo("百度地图", R.mipmap.image_practice_repast_3));
+        appList.add(new AppInfo("花溪牛肉粉", R.mipmap.image_practice_repast_4));
         appList.add(new AppInfo("但家香酥鸭", R.mipmap.image_practice_repast_1));
         appList.add(new AppInfo("香菇蒸鸟蛋", R.mipmap.image_practice_repast_2));
         appList.add(new AppInfo("花溪牛肉粉", R.mipmap.image_practice_repast_3));
@@ -212,7 +234,7 @@ public class HomeFragment extends Fragment {
     public void setStatusBarColor(int colorRes) {
         refreshLayout.getLayout().setBackgroundResource(R.color.common_nomal_color);
         refreshLayout.setPrimaryColors(0, 0xff666666);
-
+        toolbar.setBackgroundResource(colorRes);
         SystemBarTintManager tintManager = new SystemBarTintManager(getActivity());
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setStatusBarTintResource(colorRes);

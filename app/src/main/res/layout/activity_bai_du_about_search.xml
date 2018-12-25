@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    app:srlEnablePreviewInEditMode="false"
+    tools:context="com.nyq.projecttreasure.activitys.baidumap.BaiDuAboutSearchActivity">
+
+
+    <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.github.jdsjlzx.recyclerview.LRecyclerView>
+
+    <LinearLayout
+        android:id="@+id/toobar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/fake_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/transparent" />
+        <!--透明标题栏-->
+        <include layout="@layout/nav_back_transparent_v1" />
+    </LinearLayout>
+
+</FrameLayout>

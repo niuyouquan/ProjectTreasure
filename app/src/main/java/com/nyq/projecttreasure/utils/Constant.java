@@ -1,8 +1,5 @@
 package com.nyq.projecttreasure.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @desc:(常量定义）
  * @company:中国电信甘肃万维
@@ -63,4 +60,14 @@ public class Constant {
      * 登陆
      */
     public static final String LOGIN_URL ="a/login";
+
+    /**
+     * 通知
+     */
+    public static final String ACTION_CLOSE = "com.nyq.projecttreasure.notification.close";
+
+    /**
+     * 定位广播
+     */
+    public static final String ACTION_LOCATION = "com.nyq.projecttreasure.location";
 }

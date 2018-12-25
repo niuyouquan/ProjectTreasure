@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="#00000000"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/top_left"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:gravity="left|center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="@dimen/dp_10"
+            android:src="@mipmap/nav_back_white" />
+
+        <TextView
+            android:id="@+id/tv_address_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="兰州市"
+            android:textSize="@dimen/dp_14"
+            android:textColor="@color/ml_white"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/top_middle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_18" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/top_right"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_address_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dp_14"
+            android:textColor="@color/white"
+            android:text=""/>
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="12dp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,17 +1,11 @@
 package com.nyq.projecttreasure.activitys.main;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.next.easynavigition.view.EasyNavigitionBar;
@@ -23,8 +17,10 @@ import com.nyq.projecttreasure.fragments.FindFragment;
 import com.nyq.projecttreasure.fragments.HomeFragment;
 import com.nyq.projecttreasure.fragments.MeFragment;
 import com.nyq.projecttreasure.fragments.MsgFragment;
+import com.nyq.projecttreasure.service.notification.NotificationService;
 import com.nyq.projecttreasure.utils.AGCache;
 import com.nyq.projecttreasure.utils.ActivityManager;
+import com.nyq.projecttreasure.utils.NotificationUtils;
 import com.nyq.projecttreasure.utils.SPUtils;
 import com.nyq.projecttreasure.utils.StringHelper;
 import com.nyq.projecttreasure.utils.ToastUtil;
@@ -104,6 +100,11 @@ public class MainActivity extends BaseActivity {
                     }
                 })
                 .build();
+
+        Intent musicService = new Intent();
+        musicService.setClass(activity, NotificationService.class);
+        activity.startService(musicService);
+        NotificationUtils.getInstance(activity).showNotification("您有一条消息", "今天你有好运", "你要遇上个小姐姐");
     }
 
     public EasyNavigitionBar getNavigitionBar() {

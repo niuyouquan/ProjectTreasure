@@ -1,23 +1,25 @@
 package com.nyq.projecttreasure.application;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.support.multidex.MultiDex;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.okhttp.OkhttpUtil;
+import com.nyq.projecttreasure.service.baidaumap.BaiDuLocationService;
 import com.nyq.projecttreasure.utils.RootProxyUtil;
 import com.rain.library.PhotoPick;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
 
+import org.litepal.LitePal;
 import org.xutils.x;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -28,12 +30,7 @@ public class App extends Application {
     private boolean isRoot;//是否手机root
     private boolean isProxy;//是否 设置代理
     private static boolean isDebug = false;
-    private List activitys = null;
     private static App instance;
-
-    public App() {
-        activitys = new LinkedList();
-    }
 
     /**
      * 单例模式中获取唯一的MyApplication实例
@@ -41,33 +38,15 @@ public class App extends Application {
      * @return
      */
     public static App getInstance() {
-        if (null == instance) {
-            instance = new App();
+        if (instance == null) {
+            synchronized (App.class) {
+                if (instance == null) {
+                    instance = new App();
+                }
+            }
         }
         return instance;
 
-    }
-
-    // 添加Activity到容器中
-    public void addActivity(Activity activity) {
-        if (activitys != null && activitys.size() > 0) {
-            if(!activitys.contains(activity)){
-                activitys.add(activity);
-            }
-        }else{
-            activitys.add(activity);
-        }
-    }
-
-    // 遍历所有Activity并finish
-    public void exit() {
-        if (activitys != null && activitys.size() > 0) {
-            for (int i = 0; i < activitys.size(); i++) {
-                Activity activity = (Activity) activitys.get(i);
-                activity.finish();
-            }
-        }
-        System.exit(0);
     }
 
     @Override
@@ -79,25 +58,36 @@ public class App extends Application {
         setProxy(RootProxyUtil.isWifiProxy(getApplicationContext()));
         context = getApplicationContext();
         setIsDebug(false);
-//        /**
-//         * 65535 问题
-//         */
-        MultiDex.install(this);
+        /**
+         * 数据库
+         */
+        LitePal.initialize(this);
         /**
          * xutils3网络框架
          */
         x.Ext.init(this);
         x.Ext.setDebug(false); // 是否输出debug日志, 开启debug会影响性能.
-//
-//        /**
-//         * 二维码
-//         */
-//        ZXingLibrary.initDisplayOpinion(this);
+
+        /**
+         * 二维码
+         */
+        ZXingLibrary.initDisplayOpinion(this);
 
         /**
          * 图片选择
          */
         PhotoPick.init(getApplicationContext(),R.color.colorPrimary);
+
+        /***
+         * 初始化定位sdk，建议在Application中创建
+         */
+        SDKInitializer.initialize(getApplicationContext());
+
+        /**
+         * 开启定位服务
+         */
+        Intent startIntent = new Intent(this, BaiDuLocationService.class);
+        startService(startIntent);
 
         /**
          * zhy的okhttp网络框架
@@ -134,6 +124,15 @@ public class App extends Application {
                 .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(config);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        /**
+         * 65535 问题
+         */
+        MultiDex.install(this);
     }
 
     public static Context getContextObject() {

@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -16,9 +17,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.nyq.projecttreasure.DBLitePal.LitePalManage;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.base.BaseActivity;
+import com.nyq.projecttreasure.models.AreaInfo;
 import com.nyq.projecttreasure.models.HealthInfo;
+import com.nyq.projecttreasure.utils.AGCache;
 import com.nyq.projecttreasure.utils.BannerGlideImageLoader;
 import com.nyq.projecttreasure.utils.ColorUtil;
 import com.nyq.projecttreasure.utils.DensityUtil;
@@ -29,7 +33,6 @@ import com.nyq.projecttreasure.views.DividerItemDecoration;
 import com.nyq.projecttreasure.views.MLImageView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -60,18 +63,23 @@ public class ChenjinshiActivity extends BaseActivity {
     LinearLayout toobarLayout;
     @BindView(R.id.fake_status_bar)
     View fakeStatusBar;
-//    private ClassicsHeader mClassicsHeader;
+    @BindView(R.id.top_right)
+    LinearLayout topRight;
+    @BindView(R.id.tv_address)
+    TextView tvAddress;
+    //    private ClassicsHeader mClassicsHeader;
 //    private Drawable mDrawableProgress;
     private List<HealthInfo> healthInfos;
     private JkzxAdapter mAdapter;
     private int pageNumber = 1;
-
 
     private int adViewHeight = 180; // 广告视图的高度
     private int adViewTopSpace; // 广告视图距离顶部的距离
     private boolean isScrollIdle = true; // recycleView是否在滑动
     private int titleViewHeight = 40; // 标题栏的高度
     private List<String> BANNER_ITEMS = new ArrayList<>();
+
+    private AreaInfo areaInfo;
 
 
     @Override
@@ -97,6 +105,9 @@ public class ChenjinshiActivity extends BaseActivity {
                 activity.overridePendingTransition(R.anim.activity_slide_in_left, R.anim.activity_slide_out_right);
             }
         });
+        tvAddress.setText(AGCache.CITY_NAME);
+        Log.e("areaInfo",AGCache.CITY_CODE);
+        Log.e("areaInfo", LitePalManage.getIntance().getAreaInfo(AGCache.CITY_CODE).toString());
     }
 
 
@@ -167,7 +178,7 @@ public class ChenjinshiActivity extends BaseActivity {
                 recyclerView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        pageNumber ++;
+                        pageNumber++;
                         if (pageNumber > 4) {
                             Toast.makeText(activity, "数据全部加载完毕", Toast.LENGTH_SHORT).show();
                             mAdapter.setEnableLoadMore(false);
@@ -196,7 +207,7 @@ public class ChenjinshiActivity extends BaseActivity {
                 adViewTopSpace = DensityUtil.px2dip(activity, mAdapter.getHeaderLayout().getTop());
                 adViewHeight = DensityUtil.px2dip(activity, mAdapter.getHeaderLayout().getHeight());
                 if (-adViewTopSpace <= 50) {
-                    topMiddle.setVisibility(View.GONE);
+                    topMiddle.setVisibility(View.INVISIBLE);
                 } else {
                     topMiddle.setVisibility(View.VISIBLE);
                 }
@@ -266,5 +277,10 @@ public class ChenjinshiActivity extends BaseActivity {
             fakeStatusBar.setBackgroundColor(ColorUtil.getNewColorByStartEndColor(activity, fraction, R.color.transparent, R.color.colorPrimary));
             toolbar.setBackgroundColor(ColorUtil.getNewColorByStartEndColor(activity, fraction, R.color.transparent, R.color.colorPrimary));
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
