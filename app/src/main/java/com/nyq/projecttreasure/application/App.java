@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.multidex.MultiDex;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.blankj.utilcode.util.Utils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -52,6 +53,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Utils.init(this);
         //设置是否root
         setRoot(RootProxyUtil.isDeviceRooted());
         //设置是否代理

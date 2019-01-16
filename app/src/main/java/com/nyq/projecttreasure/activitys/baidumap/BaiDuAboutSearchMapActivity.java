@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,7 @@ import com.baidu.mapapi.search.poi.PoiSortType;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.activitys.baidumap.overlayutil.PoiOverlay;
 import com.nyq.projecttreasure.base.BaseActivity;
+import com.nyq.projecttreasure.popupwindow.AddressPopup;
 import com.nyq.projecttreasure.utils.AGCache;
 import com.nyq.projecttreasure.utils.Constant;
 import com.nyq.projecttreasure.utils.ToastUtil;
@@ -64,6 +67,8 @@ public class BaiDuAboutSearchMapActivity extends BaseActivity implements View.On
     ImageView btnLocale;
     @BindView(R.id.tv_about_search)
     TextView tvAboutSearch;
+    @BindView(R.id.rl_layout)
+    RelativeLayout rlLayout;
 
     private BaiDuLocationReceiver receiver;
     // 构造定位数据
@@ -74,9 +79,12 @@ public class BaiDuAboutSearchMapActivity extends BaseActivity implements View.On
     private String keyWords;
     private PoiSearch mPoiSearch = null;
     private int searchType = 0;  // 搜索的类型，在显示时区分
-    private LatLng southwest = new LatLng( 39.92235, 116.380338 );
-    private LatLng northeast = new LatLng( 39.947246, 116.414977);
+    private LatLng southwest = new LatLng(39.92235, 116.380338);
+    private LatLng northeast = new LatLng(39.947246, 116.414977);
     private LatLngBounds searchBound = new LatLngBounds.Builder().include(southwest).include(northeast).build();
+
+    private AddressPopup addressPopup;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +118,7 @@ public class BaiDuAboutSearchMapActivity extends BaseActivity implements View.On
         mPoiSearch = PoiSearch.newInstance();// 创建对象
         mPoiSearch.setOnGetPoiSearchResultListener(this);
         btnLocale.setOnClickListener(this);
+
     }
 
     public class BaiDuLocationReceiver extends BroadcastReceiver {
@@ -142,7 +151,7 @@ public class BaiDuAboutSearchMapActivity extends BaseActivity implements View.On
     /**
      * 响应周边搜索
      */
-    public void  searchNearbyProcess() {
+    public void searchNearbyProcess() {
         searchType = 2;
         LatLng center = new LatLng(currentLatitude, currentLongitude);
         PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption()
@@ -216,7 +225,7 @@ public class BaiDuAboutSearchMapActivity extends BaseActivity implements View.On
             overlay.addToMap();
             overlay.zoomToSpan();
             LatLng center = new LatLng(currentLatitude, currentLongitude);
-            switch( searchType ) {
+            switch (searchType) {
                 case 2:
                     showNearbyArea(center, 500);
                     break;
@@ -226,7 +235,6 @@ public class BaiDuAboutSearchMapActivity extends BaseActivity implements View.On
                 default:
                     break;
             }
-
             return;
         }
         if (result.error == SearchResult.ERRORNO.AMBIGUOUS_KEYWORD) {
@@ -249,7 +257,10 @@ public class BaiDuAboutSearchMapActivity extends BaseActivity implements View.On
         if (result.error != SearchResult.ERRORNO.NO_ERROR) {
             ToastUtil.refreshToast(activity, "抱歉，未找到结果", Toast.LENGTH_SHORT);
         } else {
-            ToastUtil.refreshToast(activity, result.getName() + ": " + result.getAddress(), Toast.LENGTH_SHORT);
+            ToastUtil.refreshToast(activity, result.getName() + "：" + result.getAddress(), Toast.LENGTH_SHORT);
+            addressPopup = new AddressPopup(activity, result.getName() + "：\n" + result.getAddress());
+            addressPopup.showAtLocation(rlLayout,
+                    Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0); //设置layout在PopupWindow中显示的位置
         }
     }
 
@@ -299,17 +310,17 @@ public class BaiDuAboutSearchMapActivity extends BaseActivity implements View.On
     /**
      * 对周边检索的范围进行绘制
      *
-     * @param center    周边检索中心点坐标
-     * @param radius    周边检索半径，单位米
+     * @param center 周边检索中心点坐标
+     * @param radius 周边检索半径，单位米
      */
-    public void showNearbyArea( LatLng center, int radius) {
+    public void showNearbyArea(LatLng center, int radius) {
         BitmapDescriptor centerBitmap = BitmapDescriptorFactory.fromResource(R.mipmap.icon_geo);
         MarkerOptions ooMarker = new MarkerOptions().position(center).icon(centerBitmap);
         baiduMap.addOverlay(ooMarker);
 
-        OverlayOptions ooCircle = new CircleOptions().fillColor( 0x00000000 )
+        OverlayOptions ooCircle = new CircleOptions().fillColor(0x00000000)
                 .center(center)
-                .stroke(new Stroke(5, 0xff3fb9ff ))
+                .stroke(new Stroke(5, 0xff3fb9ff))
                 .radius(radius);
 
         baiduMap.addOverlay(ooCircle);
@@ -318,9 +329,9 @@ public class BaiDuAboutSearchMapActivity extends BaseActivity implements View.On
     /**
      * 对区域检索的范围进行绘制
      *
-     * @param bounds     区域检索指定区域
+     * @param bounds 区域检索指定区域
      */
-    public void showBound( LatLngBounds bounds) {
+    public void showBound(LatLngBounds bounds) {
         BitmapDescriptor bdGround = BitmapDescriptorFactory.fromResource(R.mipmap.ground_overlay);
 
         OverlayOptions ooGround = new GroundOverlayOptions()

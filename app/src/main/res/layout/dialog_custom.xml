@@ -90,6 +90,24 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/negativeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dp_10"
+            android:textColor="@color/text_color_666666"
+            android:paddingTop="@dimen/dp_10"
+            android:text="取消" />
+
+
+        <View
+            android:id="@+id/divder"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#DCDCDC" />
+
+        <TextView
             android:id="@+id/positiveButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -100,22 +118,6 @@
             android:paddingTop="@dimen/dp_10"
             android:text="确定" />
 
-        <View
-            android:id="@+id/divder"
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#DCDCDC" />
-
-        <TextView
-            android:id="@+id/negativeButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingBottom="@dimen/dp_10"
-            android:textColor="@color/text_color_666666"
-            android:paddingTop="@dimen/dp_10"
-            android:text="取消" />
     </LinearLayout>
 
     <ImageView

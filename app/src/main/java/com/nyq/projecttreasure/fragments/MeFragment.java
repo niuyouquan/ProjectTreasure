@@ -16,6 +16,7 @@ import com.nyq.projecttreasure.activitys.mymessage.MyMessageActivity;
 import com.nyq.projecttreasure.activitys.setting.WholePatternCheckingActivity;
 import com.nyq.projecttreasure.activitys.setting.WholePatternSettingActivity;
 import com.nyq.projecttreasure.activitys.start.LoginActivity;
+import com.nyq.projecttreasure.dialog.CustomDialog;
 import com.nyq.projecttreasure.utils.PatternHelper;
 import com.nyq.projecttreasure.utils.SPUtils;
 import com.nyq.projecttreasure.utils.StringHelper;
@@ -124,16 +125,32 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.btn_logout:
-                new PatternHelper().clearStorage();
-                patternHelper = new PatternHelper();
-                phString = patternHelper.getFromStorage();
-                SPUtils.put(getContext(), "isChecked", false);
-                startActivity(new Intent(getContext(), LoginActivity.class));
-                getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
+                logOutDialog("您是要退出程序吗？");
                 break;
             default:
                 break;
         }
+    }
+
+    //退出提示弹窗
+    private void logOutDialog(String msg) {
+        CustomDialog.Builder builder = new CustomDialog.Builder(getContext())
+                .setMessage(msg)
+                .setImgSrc(R.mipmap.image_avatar_1);
+        builder.setPositiveButton("确认", R.color.colorPrimary, (dialog, which) -> {
+            dialog.dismiss();
+
+            new PatternHelper().clearStorage();
+            patternHelper = new PatternHelper();
+            phString = patternHelper.getFromStorage();
+            SPUtils.put(getContext(), "isChecked", false);
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
+        });
+        builder.setNegativeButton("取消", R.color.ml_gray, (dialog, which) -> {
+            dialog.dismiss();
+        });
+        builder.create().show();
     }
 
     @Override

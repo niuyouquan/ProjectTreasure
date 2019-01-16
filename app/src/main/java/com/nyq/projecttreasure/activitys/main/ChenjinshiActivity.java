@@ -138,10 +138,11 @@ public class ChenjinshiActivity extends BaseActivity {
 
 
         BANNER_ITEMS.clear();
-        BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg");
-        BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3566.jpg");
-        BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3750.jpg");
-        BANNER_ITEMS.add("http://app.infunpw.com/commons/images/cinema/cinema_films/3757.jpg");
+        BANNER_ITEMS.add("https://image.baidu.com/search/down?tn=download&ipn=dwnl&word=download&ie=utf8&fr=result&url=http%3A%2F%2Fpic.90sjimg.com%2Fback_pic%2F00%2F00%2F69%2F40%2F0f88dcc2a682f87d6537fd630ef93db3.jpg&thumburl=https%3A%2F%2Fss1.bdstatic.com%2F70cFvXSh_Q1YnxGkpoWK1HF6hhy%2Fit%2Fu%3D787334399%2C1030936190%26fm%3D26%26gp%3D0.jpg");
+        BANNER_ITEMS.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1181694068,3468684352&fm=26&gp=0.jpg");
+        BANNER_ITEMS.add("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1337913,139449909&fm=26&gp=0.jpg");
+        BANNER_ITEMS.add("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1771357690,1657880027&fm=26&gp=0.jpg");
+        BANNER_ITEMS.add("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=612621339,1757807680&fm=26&gp=0.jpg");
         //添加Header
         View header = LayoutInflater.from(activity).inflate(R.layout.listitem_movie_header, recyclerView, false);
         Banner banner = (Banner) header;
