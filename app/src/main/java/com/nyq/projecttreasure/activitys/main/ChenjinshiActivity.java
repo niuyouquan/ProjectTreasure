@@ -106,7 +106,7 @@ public class ChenjinshiActivity extends BaseActivity {
             }
         });
         tvAddress.setText(AGCache.CITY_NAME);
-        Log.e("areaInfo",AGCache.CITY_CODE);
+        Log.e("areaInfo", AGCache.CITY_CODE);
         Log.e("areaInfo", LitePalManage.getIntance().getAreaInfo(AGCache.CITY_CODE).toString());
     }
 
@@ -203,8 +203,10 @@ public class ChenjinshiActivity extends BaseActivity {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (isScrollIdle && adViewTopSpace < 0) {
+                    return;
+                }
                 super.onScrolled(recyclerView, dx, dy);
-                if (isScrollIdle && adViewTopSpace < 0) return;
                 adViewTopSpace = DensityUtil.px2dip(activity, mAdapter.getHeaderLayout().getTop());
                 adViewHeight = DensityUtil.px2dip(activity, mAdapter.getHeaderLayout().getHeight());
                 if (-adViewTopSpace <= 50) {
@@ -242,18 +244,12 @@ public class ChenjinshiActivity extends BaseActivity {
     //从网络获取数据
     private void getInfoList() {
         healthInfos = new ArrayList<>();
-        healthInfos.add(new HealthInfo("默认主题", new Date().toString(), getResources().getString(R.string.item_style_theme_default_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("橙色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_orange_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("红色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_red_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("绿色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_green_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("蓝色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_blue_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("Activity沉浸式", new Date().toString(), getResources().getString(R.string.item_style_theme_blue_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("默认主题", new Date().toString(), getResources().getString(R.string.item_style_theme_default_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("橙色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_orange_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("红色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_red_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("绿色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_green_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("蓝色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_blue_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
-        healthInfos.add(new HealthInfo("Activity沉浸式", new Date().toString(), getResources().getString(R.string.item_style_theme_blue_abstract), "http://app.infunpw.com/commons/images/cinema/cinema_films/3823.jpg"));
+        healthInfos.add(new HealthInfo("Activity沉浸式", new Date().toString(), "Activity内容入嵌沉浸式", "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1607779262,1632598626&fm=26&gp=0.jpg"));
+        healthInfos.add(new HealthInfo("默认主题", new Date().toString(), getResources().getString(R.string.item_style_theme_default_abstract), "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4017085655,264997454&fm=26&gp=0.jpg"));
+        healthInfos.add(new HealthInfo("橙色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_orange_abstract), "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3182596561,138363622&fm=26&gp=0.jpg"));
+        healthInfos.add(new HealthInfo("红色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_red_abstract), "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=659044909,4042106041&fm=26&gp=0.jpg"));
+        healthInfos.add(new HealthInfo("绿色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_green_abstract), "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4111176407,2620705746&fm=26&gp=0.jpg"));
+        healthInfos.add(new HealthInfo("蓝色主题", new Date().toString(), getResources().getString(R.string.item_style_theme_blue_abstract), "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2739505509,237691169&fm=26&gp=0.jpg"));
     }
 
     // 处理标题栏颜色渐变
@@ -262,14 +258,20 @@ public class ChenjinshiActivity extends BaseActivity {
         toolbar.setAlpha(1f);
         if (adViewTopSpace > 5) {
             fraction = 1f - adViewTopSpace * 1f / 60;
-            if (fraction < 0f) fraction = 0f;
+            if (fraction < 0f) {
+                fraction = 0f;
+            }
             toolbar.setAlpha(fraction);
             return;
         }
         float space = Math.abs(adViewTopSpace) * 1f;
         fraction = space / (adViewHeight - titleViewHeight);
-        if (fraction < 0f) fraction = 0f;
-        if (fraction > 1f) fraction = 1f;
+        if (fraction < 0f) {
+            fraction = 0f;
+        }
+        if (fraction > 1f) {
+            fraction = 1f;
+        }
         toolbar.setAlpha(1f);
         if (fraction >= 1f) {
             fakeStatusBar.setBackgroundColor(this.getResources().getColor(R.color.colorPrimary));
