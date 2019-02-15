@@ -140,8 +140,9 @@ public class CeHuaCaiDanActivity extends BaseActivity {
         @Override
         public boolean onItemMove(RecyclerView.ViewHolder srcHolder, RecyclerView.ViewHolder targetHolder) {
             // 不同的ViewType不能拖拽换位置。
-            if (srcHolder.getItemViewType() != targetHolder.getItemViewType()) return false;
-
+            if (srcHolder.getItemViewType() != targetHolder.getItemViewType()) {
+                return false;
+            }
             // 真实的Position：通过ViewHolder拿到的position都需要减掉HeadView的数量。
             int fromPosition = srcHolder.getAdapterPosition() - mRecyclerView.getHeaderItemCount();
             int toPosition = targetHolder.getAdapterPosition() - mRecyclerView.getHeaderItemCount();
@@ -301,7 +302,10 @@ public class CeHuaCaiDanActivity extends BaseActivity {
         }
     }
 
-    //为状态栏着色
+    /**
+     * 为状态栏着色
+     * @param colorRes
+     */
     public void setStatusBarColor(int colorRes) {
         toolbar.setBackgroundResource(colorRes);
         SystemBarTintManager tintManager = new SystemBarTintManager(activity);

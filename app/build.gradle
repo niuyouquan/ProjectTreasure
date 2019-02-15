@@ -79,6 +79,8 @@ dependencies {
     //1.1.0 API改动过大，老用户升级需谨慎
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-19'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-19'//没有使用特殊Header，可以不加这行
+    //优雅的recycleview适配器
+    implementation 'com.github.liufx:delegationadapter:1.0.1'
 
 
     implementation files('libs/universal-image-loader-1.9.1.jar')

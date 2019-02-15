@@ -168,7 +168,8 @@
             android:exported="false" />
 
         <activity android:name=".activitys.baidumap.BaiDuAboutSearchActivity" />
-        <activity android:name=".activitys.baidumap.BaiDuAboutSearchMapActivity"></activity>
+        <activity android:name=".activitys.baidumap.BaiDuAboutSearchMapActivity" />
+        <activity android:name=".activitys.youyaadapter.DelegationAdapterActivity"></activity>
     </application>
 
 </manifest>

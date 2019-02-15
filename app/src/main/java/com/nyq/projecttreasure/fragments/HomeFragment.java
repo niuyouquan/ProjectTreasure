@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.activitys.baidumap.BaiDuMapActivity;
 import com.nyq.projecttreasure.activitys.erweima.QrCodeActivity;
+import com.nyq.projecttreasure.activitys.youyaadapter.DelegationAdapterActivity;
 import com.nyq.projecttreasure.adapter.AppAdapter;
 import com.nyq.projecttreasure.adapter.ViewPagerFragmentAdapter;
 import com.nyq.projecttreasure.cehuacaidan.CeHuaCaiDanActivity;
@@ -150,7 +151,11 @@ public class HomeFragment extends Fragment {
                     Intent intent = new Intent(getContext(), BaiDuMapActivity.class);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
-                } else {
+                } else if (position == 3) {
+                    Intent intent = new Intent(getContext(), DelegationAdapterActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.activity_slide_in_right, R.anim.activity_slide_out_left);
+                }else {
                     Toast.makeText(getContext(), "fixedGridView  " + position, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -222,7 +227,7 @@ public class HomeFragment extends Fragment {
         appList.add(new AppInfo("侧滑菜单", R.mipmap.image_practice_repast_1));
         appList.add(new AppInfo("二维码扫描", R.mipmap.image_practice_repast_2));
         appList.add(new AppInfo("百度地图", R.mipmap.image_practice_repast_3));
-        appList.add(new AppInfo("花溪牛肉粉", R.mipmap.image_practice_repast_4));
+        appList.add(new AppInfo("优雅的Adapter", R.mipmap.image_practice_repast_4));
         appList.add(new AppInfo("但家香酥鸭", R.mipmap.image_practice_repast_1));
         appList.add(new AppInfo("香菇蒸鸟蛋", R.mipmap.image_practice_repast_2));
         appList.add(new AppInfo("花溪牛肉粉", R.mipmap.image_practice_repast_3));
