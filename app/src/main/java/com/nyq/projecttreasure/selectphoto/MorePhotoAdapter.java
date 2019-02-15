@@ -13,7 +13,7 @@ import com.nyq.projecttreasure.R;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Created by liufx on 16/4/20.
+ * Created by niuyq on 16/4/20.
  */
 public class MorePhotoAdapter extends RecyclerView.Adapter<MorePhotoAdapter.PhotoPickViewHolder> {
 
