@@ -22,13 +22,8 @@
             app:Easy_hasPadding="false"
             app:Easy_navigitionBackground="#90ffffff"
             app:Easy_navigitionHeight="60dp"></com.next.easynavigition.view.EasyNavigitionBar>
+        <!--app:Easy_navigitionBackground="@color/white"-->
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/fake_status_bar"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@color/transparent" />
 
 </FrameLayout>

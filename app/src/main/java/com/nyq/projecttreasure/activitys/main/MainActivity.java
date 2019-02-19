@@ -51,15 +51,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        getWindow().setBackgroundDrawable(null);
         fragments.add(HomeFragment.newInstance());
         fragments.add(MsgFragment.newInstance());
         fragments.add(FindFragment.newInstance());
         fragments.add(MeFragment.newInstance());
 
-
         View view = LayoutInflater.from(this).inflate(R.layout.custom_add_view, null);
-
         navigitionBar.titleItems(tabText)
                 .normalIconItems(normalIcon)
                 .selectIconItems(selectIcon)

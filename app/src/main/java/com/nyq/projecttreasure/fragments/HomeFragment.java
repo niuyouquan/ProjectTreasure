@@ -160,7 +160,9 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-        refreshLayout.setEnableFooterFollowWhenLoadFinished(false); //设置是否在全部加载结束之后Footer跟随内容
+        //设置是否在全部加载结束之后Footer跟随内容
+//        refreshLayout.setEnableFooterFollowWhenLoadFinished(false);
+        refreshLayout.setEnableFooterFollowWhenNoMoreData(false);
         mClassicsHeader = (ClassicsHeader) refreshLayout.getRefreshHeader();
         mClassicsHeader.setSpinnerStyle(SpinnerStyle.Scale);
         mDrawableProgress = ((ImageView) mClassicsHeader.findViewById(ClassicsHeader.ID_IMAGE_PROGRESS)).getDrawable();
@@ -173,7 +175,8 @@ public class HomeFragment extends Fragment {
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 getFragmentData();
                 refreshLayout.finishRefresh();
-                refreshLayout.setNoMoreData(true);//恢复上拉状态
+                //恢复上拉状态
+                refreshLayout.resetNoMoreData();
             }
         });
         getFragmentData();

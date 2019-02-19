@@ -6,10 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.nyq.projecttreasure.R;
 import com.nyq.projecttreasure.models.AppInfo;
-import com.nyq.projecttreasure.utils.ScreenUtils;
+import com.nyq.projecttreasure.utils.ImageLoaderUtils;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class AppAdapter extends BaseListAdapter<AppInfo> {
 
         AppInfo app = getItem(position);
         holder.tvTitle.setText(app.getName());
-        Glide.with(mContext).load(app.getImg()).into(holder.givImage);
+        ImageLoaderUtils.loadImageViewLoding(mContext,app.getImg(),holder.givImage,R.mipmap.ic_launcher,R.mipmap.ic_launcher);
 
         return convertView;
     }

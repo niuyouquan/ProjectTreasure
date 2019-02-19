@@ -36,14 +36,14 @@ public class GlideImageLoader implements ImageLoader {
     @Override
     public void displayImage(Context context, String path, ImageView imageView, boolean resize) {
         DrawableRequestBuilder builder = null;
-        builder = Glide.with(context)
-                .load(path);
-        if (resize)
+        builder = Glide.with(context).load(path);
+        if (resize) {
             builder = builder.centerCrop();
-        builder.crossFade()
-                .error(context.getResources().getDrawable(R.mipmap.error_image))
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(imageView);
+            builder.crossFade()
+                    .error(context.getResources().getDrawable(R.mipmap.error_image))
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(imageView);
+        }
     }
 
 
